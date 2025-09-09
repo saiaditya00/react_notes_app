@@ -32,8 +32,6 @@ export default function HomePage() {
 
 
     }
-    console.log(notes, archive);
-
     const pinnedNotes = notes.filter(note => note.isPinned);
     const unpinnedNotes = notes.filter(note => !note.isPinned);
 
@@ -84,7 +82,7 @@ export default function HomePage() {
 
                         {unpinnedNotes?.length > 0 && (
                             <div>
-                                <h3 className="text-lg font-semibold mb-4">Unpinned</h3>
+                                <h3 className="text-lg font-semibold mb-4">{pinnedNotes?.length > 0 ? `Other Notes` : `Notes`}</h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                     {unpinnedNotes.map(({ id, title, text, isPinned }) => (
                                         <NotesCard key={id} id={id} title={title} text={text} isPinned={isPinned} />

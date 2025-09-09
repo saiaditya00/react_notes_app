@@ -54,9 +54,41 @@ const notesReducer = (state, { type, payload }) => {
                 notes: [...state.notes, state.archive.find(note => note.id === payload.id)],
                 archive: state.archive.filter(note => note.id !== payload.id)
             }
+        case "ADD_TO_IMPORTANT":
+            return {
+                ...state,
+                important: [...state.important, state.notes.find(note => note.id === payload.id)],
+                notes: state.notes.filter(note => note.id !== payload.id)
+            }
 
-
-
+        case "REMOVE_FROM_IMPORTANT":
+            return {
+                ...state,
+                notes: [...state.notes, state.important.find(note => note.id === payload.id)],
+                important: state.important.filter(note => note.id !== payload.id)
+            }
+        case "ADD_TO_BIN":
+            const noteToDelete = state.notes.find(note => note.id === payload.id) ||
+                               state.archive.find(note => note.id === payload.id) ||
+                               state.important.find(note => note.id === payload.id);
+            return {
+                ...state,
+                bin: [...state.bin, noteToDelete],
+                notes: state.notes.filter(note => note.id !== payload.id),
+                archive: state.archive.filter(note => note.id !== payload.id),
+                important: state.important.filter(note => note.id !== payload.id)
+            }
+        case "REMOVE_FROM_BIN":
+            return {
+                ...state,
+                bin: state.bin.filter(note => note.id !== payload.id)
+            }
+        case "RESTORE_NOTE":
+            return {
+                ...state,
+                notes: [...state.notes, state.bin.find(note => note.id === payload.id)],
+                bin: state.bin.filter(note => note.id !== payload.id)
+            }
 
         default:
             return state;
