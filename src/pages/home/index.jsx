@@ -1,4 +1,4 @@
-import Navbar from "../../components/navbar";
+import Navbar from "../../components/Navbar";
 import { Sidebar } from "../../components/Sidebar";
 import { NotesCard } from "../../components/NotesCard";
 import { useNotes } from "../../context/notes-context";
