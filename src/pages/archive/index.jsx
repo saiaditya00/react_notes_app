@@ -1,7 +1,8 @@
-import Navbar from "../../components/navbar";
+import Navbar from "./../../components/Navbar/index";
 import { Sidebar } from "../../components/Sidebar";
 import { useNotes } from "../../context/notes-context";
 import { NotesCard } from "../../components/NotesCard";
+
 
 export default function Archive() {
     const { title, text, notes, archive, notesDispatch } = useNotes();
